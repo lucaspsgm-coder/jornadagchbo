@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2ª Edição - Jornada de Gente & Gestão</title>
+    <style>
+        :root {
+            /* Usando um tom de verde-azulado profundo baseado na sua imagem de referência */
+            --primary-color: #115f62; 
+            --secondary-color: #0b4547;
+            --text-color: #333333;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            /* Filtro para garantir que a logo branca se destaque na cor predominante */
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.2)); 
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 2.2em;
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        .agenda-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .agenda-list li {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .agenda-list li:last-child {
+            border-bottom: none;
+        }
+
+        .agenda-list .time {
+            font-weight: bold;
+            color: var(--primary-color);
+            width: 150px;
+            flex-shrink: 0;
+            font-size: 1.1em;
+        }
+
+        .agenda-list .event {
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .jardim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .jardim-item {
+            background: #fafafa;
+            border: 1px solid #eaeaea;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .jardim-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .jardim-item .icon {
+            font-size: 2em;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .jardim-item h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+
+        .jardim-item p {
+            margin: 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(17, 95, 98, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .rules {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .rules-box {
+            flex: 1;
+            min-width: 280px;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .rules-box.do {
+            background-color: #f1f8e9;
+            border: 1px solid #c5e1a5;
+        }
+
+        .rules-box.dont {
+            background-color: #ffebee;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .rules-box h3 {
+            margin-top: 0;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rules-box ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .rules-box li {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 50px;
+        }
+
+        footer h2 {
+            border: none;
+            color: white;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 600px) {
+            .agenda-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .agenda-list .time {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://imgur.com/L4vdC62.png" alt="Jornada de Gente & Gestão">
+        <p>2ª Edição · 2026</p>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>A nossa Jornada</h1>
+            <p>📅 <strong>07/Ago</strong> · 11h30 às 18h &nbsp;|&nbsp; 📍 <strong>Celebration Hotel</strong></p>
+            <p style="margin-top: 15px; font-size: 1.05em; color: #444;">
+                A Jornada de Gente & Gestão é o nosso dia — de olhar pra trás e apresentar resultados, e pra frente pra falar de estratégia e planejamento. Mas é muito mais que números: é onde a gente celebra as conquistas do time, se diverte junto e se conecta ainda mais.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Confira nossa Agenda</h2>
+            <ul class="agenda-list">
+                <li><span class="time">11h30 - 12h45</span> <span class="event">Almoço (Tropicalia Terra e Mar)</span></li>
+                <li><span class="time">13h00 - 13h15</span> <span class="event">Check-In</span></li>
+                <li><span class="time">13h15 - 14h45</span> <span class="event">Nossos Resultados - 1° Semestre</span></li>
+                <li><span class="time">15h45 - 16h00</span> <span class="event">Sintonia LAB (Esquenta Roda-Viva)</span></li>
+                <li><span class="time">16h00 - 17h30</span> <span class="event">Roda Viva</span></li>
+                <li><span class="time">17h30 - 17h45</span> <span class="event">Check-Out</span></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>O Roda Viva: Meu Jardim</h2>
+            <p>O Roda Viva é o nosso momento de conexão, o coração da Jornada. Um espaço seguro, onde o objetivo é fortalecer a equipe através de atividades vivenciais. Toda edição tem uma dinâmica diferente — a desta é o <strong>Meu Jardim</strong>.</p>
+            <p>Um jardim tem raízes que vêm de longe e um sol que o aquece todos os dias. Tem brotos que ninguém plantou de propósito, e um jardineiro cheio de paixões cuidando de cada canto. Tem flores que demoram a crescer e são verdadeiras conquistas a celebrar — e outras que têm espinhos, deixando cicatrizes pelo caminho. Tem sempre um canteiro livre, esperando o que ainda vai nascer, e um horizonte inteiro de possibilidades à frente.</p>
+            <p>A sua vida é assim também. Nesta edição, cada um vai abrir os portões do seu jardim pra gente conhecer — montando uma apresentação da sua própria história. Esse é o momento de nos conhecermos para além do crachá, gerando mais conexão e confiança.</p>
+            
+            <h3 style="color: var(--primary-color); margin-top: 35px; font-size: 1.4em;">Elementos que precisam florescer no seu jardim:</h3>
+            <div class="jardim-grid">
+                <div class="jardim-item">
+                    <span class="icon">🌱</span>
+                    <h4>Raiz</h4>
+                    <p>Suas raízes: a origem, o início da sua história, a sua essência. O que tem aí embaixo que faz você ser quem é?</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">☀️</span>
+                    <h4>Sol</h4>
+                    <p>Quem são as pessoas que iluminam o seu jardim? Quem irradia os seus dias?</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">🌿</span>
+                    <h4>Broto inesperado</h4>
+                    <p>O que na sua história foi um brotinho inesperado, um divisor de águas, uma reviravolta?</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">🌻</span>
+                    <h4>Paixões</h4>
+                    <p>Quais são as paixões do jardineiro? O que brilha os seus olhos, o que você faz no tempo livre?</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">🏵️</span>
+                    <h4>Conquista</h4>
+                    <p>O que esse jardineiro se orgulha de ter conquistado? (Não vale carreira.)</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">🥀</span>
+                    <h4>Cicatriz</h4>
+                    <p>Na vida, como num jardim, existem espinhos que deixam cicatrizes que nos marcam. Qual é a sua?</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">🪴</span>
+                    <h4>Canteiro livre</h4>
+                    <p>Esse terreno é seu. Mostre e fale sobre o tema que você quiser.</p>
+                </div>
+                <div class="jardim-item">
+                    <span class="icon">🌅</span>
+                    <h4>Horizonte</h4>
+                    <p>Seu momento de falar sobre sonhos, ambições e pra onde você quer ampliar os horizontes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Como Funciona</h2>
+            <ol style="font-size: 1.1em; color: #444; margin-bottom: 25px;">
+                <li style="margin-bottom: 10px;">Pegue o template do PPT no link abaixo.</li>
+                <li style="margin-bottom: 10px;">Personalize com suas fotos. Cada ponto do jardim vira um slide com a foto (ou fotos) que contam aquela parte da história.</li>
+                <li style="margin-bottom: 10px;">Envie até <strong>05/08</strong> para <strong>lucas.pereira@hotbeach.com.br</strong>, em formato PPT.</li>
+            </ol>
+            <div style="text-align: center;">
+                <a href="https://drive.google.com/drive/folders/1TjhRu3qROb-L5s_uh-M2FhHDPKvuJBF7?usp=sharing" target="_blank" class="cta-button">
+                    Baixar Template (Google Drive)
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Nossos Combinados</h2>
+            <div class="rules">
+                <div class="rules-box do">
+                    <h3 style="color: #2e7d32;">✅ Pode à vontade:</h3>
+                    <ul>
+                        <li>Usar várias fotos em qualquer elemento</li>
+                        <li>Apresentar na ordem que quiser</li>
+                        <li>Usar uma imagem simbólica quando não tiver foto (ex.: pra cicatriz ou pro sonho)</li>
+                        <li>Ir do leve ao profundo — você decide o quanto se abre</li>
+                    </ul>
+                </div>
+                <div class="rules-box dont">
+                    <h3 style="color: #c62828;">❌ Melhor não:</h3>
+                    <ul>
+                        <li>Descaracterizar o modelo: mantenha as fontes, as cores e os nomes dos elementos</li>
+                        <li>Usar mais de um slide por elemento (várias fotos, sim; vários slides, não)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <h2>Eu te espero lá!</h2>
+        <p>Jornada de Gente & Gestão • Hot Beach Parques e Resorts</p>
+    </footer>
+
+</body>
+</html>
